@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./CustomTable.module.css"
+import styles from "./CustomTable.module.css";
 const CustomTable = ({ columns, data }) => {
   return (
     <table className={styles.table}>

@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import CustomTable from "./Table/CustomTable";
+
 import styles from "./App.module.css";
 import SidePanel from "./components/SidePanel/SidePanel";
+import UserList from "./User/UserList";
+import CustomTable from "./components/Table/CustomTable";
 const columns = [
   { header: "Name", accessor: "name" },
   { header: "Age", accessor: "age" },
@@ -16,6 +18,7 @@ const data = [
 
 const App = () => {
   const [isSidePanelOpen, setSidePanelOpen] = useState(false);
+  const [tableData, setTableData] = useState([...data]);
 
   const openSidePanel = () => {
     setSidePanelOpen(true);
@@ -23,6 +26,9 @@ const App = () => {
 
   const closeSidePanel = () => {
     setSidePanelOpen(false);
+  };
+  const tableChangeHandler = (newTableData) => {
+    setTableData((prevData) => [...prevData, newTableData]);
   };
 
   return (
@@ -33,10 +39,11 @@ const App = () => {
             Add+
           </button>
         </div>
-        <CustomTable columns={columns} data={data} />
+        <CustomTable columns={columns} data={tableData} />
       </section>
       <SidePanel isOpen={isSidePanelOpen} onClose={closeSidePanel}>
         <h2>Add New Entry</h2>
+        <UserList tableChange={tableChangeHandler} />
       </SidePanel>
     </main>
   );

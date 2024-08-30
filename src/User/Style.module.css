@@ -1,0 +1,12 @@
+.actionButton{
+    text-align: right;
+   
+}
+.actionButton button{
+    padding: 5px 10px;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    cursor: pointer;
+}
