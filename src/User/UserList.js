@@ -3,9 +3,21 @@ import Input from "../components/Input/Input";
 import styles from "./Style.module.css";
 import useUserListHook from "./UserListHook";
 import Button from "../components/Button/Button";
-const UserList = ({ editData, isSidePanelOpen, setTableData, setSidePanelOpen, onClose}) => {
-  const { form, onChangeHandler, submitHandler, errorData } = useUserListHook({onClose,setSidePanelOpen,setTableData, editData, isSidePanelOpen});
- 
+const UserList = ({
+  editData,
+  isSidePanelOpen,
+  setTableData,
+  setSidePanelOpen,
+  onClose,
+}) => {
+  const { form, onChangeHandler, submitHandler, errorData } = useUserListHook({
+    onClose,
+    setSidePanelOpen,
+    setTableData,
+    editData,
+    isSidePanelOpen,
+  });
+
   return (
     <form onSubmit={submitHandler}>
       <div className="formFlex">
@@ -43,7 +55,7 @@ const UserList = ({ editData, isSidePanelOpen, setTableData, setSidePanelOpen, o
       </div>
       <div className="formGroup">
         <div className={styles.actionButton}>
-          <Button type="submit" >Save</Button>
+          <Button type="submit">Save</Button>
         </div>
       </div>
     </form>

@@ -1,18 +1,20 @@
 import React, { useCallback, useEffect, useState } from "react";
 
+const initialData ={
+  name: "",
+  age: "",
+  city: "",
+  id: null,
+}
 const useUserListHook = ({
   setSidePanelOpen,
   editData,
   onClose,
   setTableData,
+  isSidePanelOpen
 }) => {
   const [errorData, setErrorData] = useState({});
-  const [form, setForm] = useState({
-    name: "",
-    age: "",
-    city: "",
-    id: null,
-  });
+  const [form, setForm] = useState({...initialData});
  
   useEffect(() => {
     if (!editData) return;
@@ -26,6 +28,12 @@ const useUserListHook = ({
       };
     });
   }, [editData]);
+  useEffect(() => {
+    if (!isSidePanelOpen) {
+      handleReset();
+    }
+  }, [setSidePanelOpen, isSidePanelOpen]);
+
 
   const onChangeHandler = (e) => {
     const { name, value } = e.target;
@@ -91,8 +99,14 @@ const useUserListHook = ({
         };
       });
     },
-    [checkFormValidation, form, setErrorData, setForm, setTableData, onClose]
+    [checkFormValidation, form, setErrorData, setForm, setTableData, onClose, isSidePanelOpen]
   );
+
+  const handleReset = useCallback(() => {
+    setForm({ ...initialData });
+
+    setErrorData({});
+  }, [form, setForm, setErrorData]);
 
   return {
     form,

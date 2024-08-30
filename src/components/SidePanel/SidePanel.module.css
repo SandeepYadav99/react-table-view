@@ -1,8 +1,8 @@
 .sidePanel {
   position: fixed;
-  right: -500px;
+  right: -45vw;
   top: 0;
-  width: 500px;
+  width: 45vw;
   height: 100%;
   background-color: white;
   box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);

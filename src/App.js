@@ -13,16 +13,16 @@ const columns = [
 ];
 
 const data = [
-  { name: "John Doe", age: 28, city: "New York" , id:1},
-  { name: "Jane Smith", age: 34, city: "San Francisco" , id:2},
-  { name: "Sam Green", age: 22, city: "Chicago" , id:3},
+  { name: "John Doe", age: 28, city: "New York", id: 1 },
+  { name: "Jane Smith", age: 34, city: "San Francisco", id: 2 },
+  { name: "Sam Green", age: 22, city: "Chicago", id: 3 },
 ];
 
 const App = () => {
   const [isSidePanelOpen, setSidePanelOpen] = useState(false);
   const [tableData, setTableData] = useState([...data]);
   const [editData, setEditData] = useState();
- 
+
   const openSidePanel = () => {
     setSidePanelOpen(true);
   };
@@ -31,15 +31,23 @@ const App = () => {
     setSidePanelOpen(false);
   };
 
-  const deleteHandler = useCallback((newTableData) => {
-    const deletedItem = tableData.filter((tData)=>tData.id !== newTableData);
-    setTableData(deletedItem)
-  },[tableData]);
+  const deleteHandler = useCallback(
+    (newTableData) => {
+      const deletedItem = tableData.filter(
+        (tData) => tData.id !== newTableData
+      );
+      setTableData(deletedItem);
+    },
+    [tableData]
+  );
 
-  const openSidePanelHandler = useCallback((id) => {
-    const editValue = tableData.find((tv) => tv.id === id);
-    setEditData(editValue);
-  },[tableData]);
+  const openSidePanelHandler = useCallback(
+    (id) => {
+      const editValue = tableData.find((tv) => tv.id === id);
+      setEditData(editValue);
+    },
+    [tableData]
+  );
 
   return (
     <main className={styles.main}>
@@ -57,7 +65,13 @@ const App = () => {
       </section>
       <SidePanel isOpen={isSidePanelOpen} onClose={closeSidePanel}>
         <h2>Add New Entry</h2>
-        <UserList onClose={closeSidePanel} setSidePanelOpen={setSidePanelOpen} setTableData={setTableData} editData={editData} isSidePanelOpen={isSidePanelOpen}/>
+        <UserList
+          onClose={closeSidePanel}
+          setSidePanelOpen={setSidePanelOpen}
+          setTableData={setTableData}
+          editData={editData}
+          isSidePanelOpen={isSidePanelOpen}
+        />
       </SidePanel>
     </main>
   );
