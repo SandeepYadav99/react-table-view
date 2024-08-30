@@ -1,13 +1,31 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
-const useUserListHook = ({ tableChange }) => {
+const useUserListHook = ({
+  setSidePanelOpen,
+  editData,
+  isSidePanelOpen,
+  setTableData,
+}) => {
   const [errorData, setErrorData] = useState({});
   const [form, setForm] = useState({
     name: "",
     age: "",
     city: "",
+    id: null,
   });
-
+  console.log(editData);
+  useEffect(() => {
+    if (!editData) return;
+    setForm((prev) => {
+      return {
+        ...prev,
+        name: editData.name,
+        age: editData.age,
+        city: editData.city,
+        id: editData.id,
+      };
+    });
+  }, [editData]);
   const onChangeHandler = (e) => {
     const { name, value } = e.target;
     setForm((prev) => {
@@ -49,7 +67,18 @@ const useUserListHook = ({ tableChange }) => {
         setErrorData(errors);
         return;
       }
-      tableChange(form);
+      setSidePanelOpen(true);
+     
+      if (editData?.id) {
+        setTableData((prevData) =>
+          prevData.map((item) =>
+            item.id === form.id ? { ...item, ...form } : item
+          )
+        );
+      } else {
+        console.log(form)
+        setTableData((prev) => [...prev, { ...form, id: new Date() }]);
+      }
 
       setForm((prev) => {
         return {
@@ -60,7 +89,7 @@ const useUserListHook = ({ tableChange }) => {
         };
       });
     },
-    [checkFormValidation, form, setErrorData, setForm]
+    [checkFormValidation, form, setErrorData, setForm, setTableData]
   );
 
   return {

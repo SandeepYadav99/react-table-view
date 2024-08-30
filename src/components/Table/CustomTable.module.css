@@ -12,3 +12,8 @@
   .th {
     background-color: #f4f4f4;
   }
+  .tAction{
+    display: flex;
+    gap: 8px;
+  }
+  

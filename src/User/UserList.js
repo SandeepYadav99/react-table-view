@@ -2,8 +2,9 @@ import React from "react";
 import Input from "../components/Input/Input";
 import styles from "./Style.module.css";
 import useUserListHook from "./UserListHook";
-const UserList = ({tableChange}) => {
-  const { form, onChangeHandler, submitHandler, errorData } = useUserListHook({tableChange});
+import Button from "../components/Button/Button";
+const UserList = ({ editData, isSidePanelOpen, setTableData, setSidePanelOpen}) => {
+  const { form, onChangeHandler, submitHandler, errorData } = useUserListHook({setSidePanelOpen,setTableData, editData, isSidePanelOpen});
  
   return (
     <form onSubmit={submitHandler}>
@@ -42,7 +43,7 @@ const UserList = ({tableChange}) => {
       </div>
       <div className="formGroup">
         <div className={styles.actionButton}>
-          <button type="submit" >Save</button>
+          <Button type="submit" >Save</Button>
         </div>
       </div>
     </form>
