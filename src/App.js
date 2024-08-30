@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 
 import styles from "./App.module.css";
 import SidePanel from "./components/SidePanel/SidePanel";
@@ -30,17 +30,17 @@ const App = () => {
   const closeSidePanel = () => {
     setSidePanelOpen(false);
   };
-  const deleteHandler = (newTableData) => {
+
+  const deleteHandler = useCallback((newTableData) => {
     const deletedItem = tableData.filter((tData)=>tData.id !== newTableData);
     setTableData(deletedItem)
-   
-  };
+  },[tableData]);
 
-  const openSidePanelHandler = (id) => {
-    console.log(id);
+  const openSidePanelHandler = useCallback((id) => {
     const editValue = tableData.find((tv) => tv.id === id);
     setEditData(editValue);
-  };
+  },[tableData]);
+
   return (
     <main className={styles.main}>
       <section>
@@ -57,7 +57,7 @@ const App = () => {
       </section>
       <SidePanel isOpen={isSidePanelOpen} onClose={closeSidePanel}>
         <h2>Add New Entry</h2>
-        <UserList setSidePanelOpen={setSidePanelOpen} setTableData={setTableData} editData={editData} isSidePanelOpen={isSidePanelOpen}/>
+        <UserList onClose={closeSidePanel} setSidePanelOpen={setSidePanelOpen} setTableData={setTableData} editData={editData} isSidePanelOpen={isSidePanelOpen}/>
       </SidePanel>
     </main>
   );

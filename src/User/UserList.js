@@ -3,8 +3,8 @@ import Input from "../components/Input/Input";
 import styles from "./Style.module.css";
 import useUserListHook from "./UserListHook";
 import Button from "../components/Button/Button";
-const UserList = ({ editData, isSidePanelOpen, setTableData, setSidePanelOpen}) => {
-  const { form, onChangeHandler, submitHandler, errorData } = useUserListHook({setSidePanelOpen,setTableData, editData, isSidePanelOpen});
+const UserList = ({ editData, isSidePanelOpen, setTableData, setSidePanelOpen, onClose}) => {
+  const { form, onChangeHandler, submitHandler, errorData } = useUserListHook({onClose,setSidePanelOpen,setTableData, editData, isSidePanelOpen});
  
   return (
     <form onSubmit={submitHandler}>

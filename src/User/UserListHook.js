@@ -3,7 +3,7 @@ import React, { useCallback, useEffect, useState } from "react";
 const useUserListHook = ({
   setSidePanelOpen,
   editData,
-  isSidePanelOpen,
+  onClose,
   setTableData,
 }) => {
   const [errorData, setErrorData] = useState({});
@@ -13,7 +13,7 @@ const useUserListHook = ({
     city: "",
     id: null,
   });
-  console.log(editData);
+ 
   useEffect(() => {
     if (!editData) return;
     setForm((prev) => {
@@ -26,6 +26,7 @@ const useUserListHook = ({
       };
     });
   }, [editData]);
+
   const onChangeHandler = (e) => {
     const { name, value } = e.target;
     setForm((prev) => {
@@ -75,11 +76,12 @@ const useUserListHook = ({
             item.id === form.id ? { ...item, ...form } : item
           )
         );
+        
       } else {
-        console.log(form)
+      
         setTableData((prev) => [...prev, { ...form, id: new Date() }]);
       }
-
+      onClose()
       setForm((prev) => {
         return {
           ...prev,
@@ -89,7 +91,7 @@ const useUserListHook = ({
         };
       });
     },
-    [checkFormValidation, form, setErrorData, setForm, setTableData]
+    [checkFormValidation, form, setErrorData, setForm, setTableData, onClose]
   );
 
   return {
