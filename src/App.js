@@ -1,25 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import CustomTable from './Table/CustomTable';
+import styles from "./App.module.css"
+const columns = [
+  { header: 'Name', accessor: 'name' },
+  { header: 'Age', accessor: 'age' },
+  { header: 'City', accessor: 'city' }
+];
 
-function App() {
+const data = [
+  { name: 'John Doe', age: 28, city: 'New York' },
+  { name: 'Jane Smith', age: 34, city: 'San Francisco' },
+  { name: 'Sam Green', age: 22, city: 'Chicago' }
+];
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <main className={styles.main}>
+
+      <CustomTable columns={columns} data={data} />
+    </main>
+  )
 }
 
-export default App;
+export default App
