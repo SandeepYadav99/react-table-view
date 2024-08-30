@@ -10,6 +10,11 @@
 .input-filed:focus {
   border-color: #007bff;
 }
+.input-filed[type="number"]::-webkit-outer-spin-button,
+.input-filed[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 .errorMessage {
   color: red;
   font-size: 14px;

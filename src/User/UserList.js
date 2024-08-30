@@ -36,6 +36,7 @@ const UserList = ({
           <Input
             placeholder="Age"
             name="age"
+            type="number"
             errorText={errorData.age}
             value={form?.age}
             onChange={onChangeHandler}
